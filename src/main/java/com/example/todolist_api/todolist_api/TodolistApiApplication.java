@@ -11,7 +11,12 @@ public class TodolistApiApplication {
 
 	  public static void main(String[] args) {
         // Load .env file
-        Dotenv dotenv = Dotenv.configure().load();
+     
+
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()  // Prevents crashing if .env is missing
+                .load();
+        
         dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
 
         // Start Spring Boot application
